@@ -15,3 +15,4 @@ Run `schema.sql` once.
 
 ## Health check
 Open `/api/health`. Expected: `dbBound`, `tokenConfigured`, and `databaseReady` are all `true`.
+    Deployment refresh
