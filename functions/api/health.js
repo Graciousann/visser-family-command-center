@@ -1,0 +1,29 @@
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'cache-control': 'no-store'
+    }
+  });
+}
+
+export async function onRequestGet({ env }) {
+  const result = {
+    ok: true,
+    dbBound: Boolean(env.DB),
+    tokenConfigured: Boolean(String(env.HOUSEHOLD_TOKEN || '').trim()),
+    databaseReady: false
+  };
+
+  if (!env.DB) return json(result);
+
+  try {
+    const row = await env.DB.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='household_state'").first();
+    result.databaseReady = Boolean(row?.name === 'household_state');
+  } catch (error) {
+    result.databaseError = error instanceof Error ? error.message : String(error);
+  }
+
+  return json(result);
+}

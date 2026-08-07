@@ -45,3 +45,10 @@ Because the frontend is plain HTML/CSS/JS, open `index.html` directly for UI wor
 - `app.js` – interactions, local persistence, sync client
 - `functions/api/state.js` – authenticated shared-state API
 - `schema.sql` – D1 database schema
+
+## v1.1 diagnostics
+
+- `/api/health` safely reports whether the Pages Function can see the `DB` binding, the `HOUSEHOLD_TOKEN` secret, and the `household_state` table. It never returns the secret or household data.
+- Family codes are URI-encoded in transit so punctuation or Unicode characters cannot break the custom request header.
+- Sync failures now show the actual HTTP status/server message in the Settings screen.
+- The Today view now follows the browser's current weekday/date instead of being hard-coded to Friday.
