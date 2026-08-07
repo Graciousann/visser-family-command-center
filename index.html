@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#173d38" />
+  <title>Visser Family Command Center</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Visser Family</p>
+        <h1>Command Center</h1>
+      </div>
+      <div class="top-actions">
+        <button id="profileBtn" class="ghost-btn">GraceAnn</button>
+        <button id="syncBtn" class="sync-pill" title="Sync status"><span class="dot"></span><span id="syncLabel">Local</span></button>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Dashboard sections">
+      <button class="tab active" data-view="today">Today</button>
+      <button class="tab" data-view="week">Week</button>
+      <button class="tab" data-view="load">Family Load</button>
+      <button class="tab" data-view="meals">Meals</button>
+      <button class="tab" data-view="settings">Settings</button>
+    </nav>
+
+    <main>
+      <section id="today" class="view active-view">
+        <div class="hero-grid">
+          <article class="hero-card">
+            <p class="eyebrow">Friday, August 7</p>
+            <h2>What matters today</h2>
+            <div id="todayEvents" class="event-list"></div>
+            <button class="text-btn" data-action="add-event">+ Add something to today</button>
+          </article>
+          <article class="hero-card warm">
+            <p class="eyebrow">Load check</p>
+            <h2 id="loadHeadline">Shared, not managed</h2>
+            <p id="loadCopy">Ownership means noticing, planning, and finishing—not waiting to be assigned.</p>
+            <div id="adultSummary" class="adult-summary"></div>
+          </article>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">Family inbox</p><h2>Catch it before it becomes Mom's job</h2></div><button class="primary-btn" data-action="add-task">Add task</button></div>
+        <div id="taskList" class="task-list"></div>
+      </section>
+
+      <section id="week" class="view">
+        <div class="section-heading"><div><p class="eyebrow">One glance</p><h2>This week</h2></div><button class="primary-btn" data-action="add-event">Add event</button></div>
+        <div id="weekGrid" class="week-grid"></div>
+      </section>
+
+      <section id="load" class="view">
+        <div class="section-heading"><div><p class="eyebrow">Fair Play inspired</p><h2>Who owns what</h2><p class="subhead">The owner carries conception, planning, and execution.</p></div><button class="primary-btn" data-action="add-domain">Add responsibility</button></div>
+        <div id="domainGrid" class="domain-grid"></div>
+      </section>
+
+      <section id="meals" class="view">
+        <div class="section-heading"><div><p class="eyebrow">Dinner without the 4:45 panic</p><h2>Meal plan</h2></div><button class="primary-btn" data-action="edit-meals">Edit week</button></div>
+        <div id="mealGrid" class="meal-grid"></div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="settings-grid">
+          <article class="settings-card">
+            <p class="eyebrow">Shared household</p><h2>Connect GraceAnn + Andrew</h2>
+            <p>Once Cloudflare is deployed, enter the same family code on both devices. Changes will sync through the shared database.</p>
+            <label>Family code<input id="familyCode" type="password" placeholder="Enter shared code" /></label>
+            <button id="saveCode" class="primary-btn">Save & sync</button>
+          </article>
+          <article class="settings-card">
+            <p class="eyebrow">Calendar sources</p><h2>Keep each person's calendar visible</h2>
+            <p>Use the Hearth/Apple calendars as the source of truth. This dashboard is designed to sit beside them, not replace them.</p>
+            <div id="calendarSources"></div>
+          </article>
+          <article class="settings-card">
+            <p class="eyebrow">Reset</p><h2>Start fresh</h2>
+            <p>Clears this browser's local copy. Shared Cloudflare data is untouched.</p>
+            <button id="resetLocal" class="ghost-btn danger">Clear local data</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="modal">
+    <form method="dialog" id="modalForm">
+      <div class="modal-head"><h2 id="modalTitle">Add task</h2><button value="cancel" class="icon-btn" aria-label="Close">×</button></div>
+      <div id="modalBody"></div>
+      <div class="modal-actions"><button value="cancel" class="ghost-btn">Cancel</button><button id="modalSave" value="default" class="primary-btn">Save</button></div>
+    </form>
+  </dialog>
+
+  <template id="ownerButtons">
+    <div class="segmented"><button type="button" data-owner="GraceAnn">GraceAnn</button><button type="button" data-owner="Andrew">Andrew</button><button type="button" data-owner="Shared">Shared</button></div>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
