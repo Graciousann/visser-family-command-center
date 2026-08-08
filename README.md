@@ -20,3 +20,18 @@ Open `/api/health`. Expected: `dbBound`, `tokenConfigured`, and `databaseReady` 
 ## Sync-route repair
 
 This build uses `/api/sync` instead of `/api/state` to force Cloudflare Pages to compile a fresh sync route.
+
+
+## D1-based household authentication
+
+This build no longer requires `HOUSEHOLD_TOKEN`.
+
+On the first authenticated sync attempt, the supplied family code is SHA-256 hashed and the hash is stored in D1. The plaintext code is never stored in D1 or GitHub. Subsequent devices must use the same family code.
+
+If you ever need to reset the household code, run:
+
+```sql
+DELETE FROM household_config WHERE id = 'visser';
+```
+
+Then the next family code entered becomes the new household code.
