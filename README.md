@@ -15,4 +15,8 @@ Run `schema.sql` once.
 
 ## Health check
 Open `/api/health`. Expected: `dbBound`, `tokenConfigured`, and `databaseReady` are all `true`.
-    Deployment refresh
+
+
+## Sync-route repair
+
+This build uses `/api/sync` instead of `/api/state` to force Cloudflare Pages to compile a fresh sync route.
